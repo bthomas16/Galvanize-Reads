@@ -30,28 +30,17 @@ function updateBook() {
   })
 }
 
-// function validBook(todo) {
-//     if (x=1) {
-//       return true;
-//     }
-//   }
-
-// function validateBookInsertUpdateRedirect(req, res) {
-//         const book = {
-//           book_id: req.body.book_id,
-//           title: req.body.title,
-//           description: req.body.description,
-//           genre: req.body.genre,
-//           coverPic: req.body.coverPic
-//         }
-//     }
+function deleteBook(book_id) {
+  return knex('books').where(
+  'book_id', book_id).del()
+}
 
 module.exports = {
   bookInfo,
   authorInfo,
   newBook,
-  updateBook
-  // validateBookInsertUpdateRedirect
+  updateBook,
+  deleteBook
 }
 
 

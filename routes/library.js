@@ -85,6 +85,12 @@ router.post('/books/:book_id/:title/update', (req,res) => {
         res.redirect(`/galvanize_reads/library/books`)
         })
       })
+
+  router.get('/books/:id/:title/delete', (req, res) => {
+    linkQuery.deleteBook(req.params.id).then(() => {
+    res.redirect('/galvanize_reads/library/books')
+  })
+})
   // var id = req.params.id
   // var title = req.params.title
   // linkQuery.updateBook(req.body, id)
