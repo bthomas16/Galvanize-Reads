@@ -21,6 +21,17 @@ function newBook(body){
   })
 }
 
+function newBook(body){
+  console.log(body);
+  console.log('bitches');
+  return knex('authors').insert({
+    fName:body.fName,
+    lName:body.lName,
+    biography:body.biography,
+    portrait:body.portrait
+  })
+}
+
 function updateBook() {
   return knex('books').where('book_id', book_id).update({
     'title': body.title,
@@ -30,9 +41,23 @@ function updateBook() {
   })
 }
 
+function updateAuthor() {
+  return knex('authors').where('author_id', author_id).update({
+    'fName': body.fName,
+    'lName': body.lName,
+    'biography': body.biography,
+    'portrait': body.portrait
+  })
+}
+
 function deleteBook(book_id) {
   return knex('books').where(
   'book_id', book_id).del()
+}
+
+function deleteAuthor(author_id) {
+  return knex('authors').where(
+  'author_id', author_id).del()
 }
 
 module.exports = {
@@ -40,7 +65,8 @@ module.exports = {
   authorInfo,
   newBook,
   updateBook,
-  deleteBook
+  deleteBook,
+  deleteAuthor
 }
 
 

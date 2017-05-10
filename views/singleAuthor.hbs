@@ -1,5 +1,8 @@
 <h1><span>Author:</span> {{fName}} {{lName}}</h1>
-<h3><span>Genre:</span> {{genre}}</h3>
-<h5><span>Description:</span> {{description}}</h5>
+<h5><span>Bio:</span> {{biography}}</h5>
 <img src="{{portrait}}" alt="">
-<h5><span>Books: <a href="/galvanize_reads/library/books/{{book_id}}/{{title}}">{{title}}</a></span>
+<h5><span>Books: <a href="/galvanize_reads/library/authors/{{book_id}}/{{title}}">{{title}}</a></span>
+
+  <a href="/galvanize_reads/library/authors/{{author_id}}/{{fName}}/{{lName}}/edit_author"><button type="button" name="button">Edit</button></a>
+  <a href="/galvanize_reads/library/authors/{{author_id}}/{{fName}}/{{lName}}/delete"><button type="button" name="button">Delete</button></a>
+  <a href="/galvanize_reads/library/authors"><button type="button" name="button">Authors</button></a>
