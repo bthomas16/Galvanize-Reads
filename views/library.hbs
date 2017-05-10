@@ -10,8 +10,8 @@
     <h5><img src="{{portrait}}" width="150px;"></h5>
   </a>
   <h5><span>Books:</span>
-    {{#each books}}
-      <a href="/galvanize_reads/library/{{id}}/{{title}}">{{title}}</a>
+    {{#each bookss}}
+      <a href="/galvanize_reads/library/{{book_id}}/{{title}}">{{title}}<img src="{{coverPic}}" alt=""></a>
     {{/each}}
   </h5>
 {{/each}}
@@ -19,7 +19,11 @@
 
 
 {{#if bookss}}
-  <button type="button" name="button">Add New Book</button>
+  <a href="/galvanize_reads/library/books/new">
+    <button type="button" name="button">
+      Add New Book
+    </button>
+  </a>
 {{/if}}
 
 {{#each bookss}}
@@ -28,7 +32,6 @@
     <h4><span>Genre:</span> {{genre}}</h4>
     <h5><span>Author:</span>  </h5>
     <h5><span>Description:</span> {{description}}</h5>
-
-    <img src="{{coverPic}}" width='150px' alt="">
+    <h5><img src="{{coverPic}}" width='150px' alt=""></h5>
   </a>
 {{/each}}
