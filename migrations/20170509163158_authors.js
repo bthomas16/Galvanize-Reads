@@ -1,10 +1,10 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('authors', function(table){
       table.increments('author_id').primary();
-      table.string('fName');
-      table.string('lName');
-      table.text('biography');
-      table.string('portrait');
+      table.string('fName').notNullable();
+      table.string('lName').notNullable();
+      table.text('biography')
+      table.string('portrait')
     });
   };
 
