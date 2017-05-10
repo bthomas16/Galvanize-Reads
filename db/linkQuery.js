@@ -21,10 +21,37 @@ function newBook(body){
   })
 }
 
+function updateBook() {
+  return knex('books').where('book_id', book_id).update({
+    'title': body.title,
+    'genre': body.genre,
+    'description': body.description,
+    'coverPic': body.coverPic
+  })
+}
+
+// function validBook(todo) {
+//     if (x=1) {
+//       return true;
+//     }
+//   }
+
+// function validateBookInsertUpdateRedirect(req, res) {
+//         const book = {
+//           book_id: req.body.book_id,
+//           title: req.body.title,
+//           description: req.body.description,
+//           genre: req.body.genre,
+//           coverPic: req.body.coverPic
+//         }
+//     }
+
 module.exports = {
   bookInfo,
   authorInfo,
-  newBook
+  newBook,
+  updateBook
+  // validateBookInsertUpdateRedirect
 }
 
 

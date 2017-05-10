@@ -1,0 +1,20 @@
+<form class="" action="/galvanize_reads/library/books/{{book_id}}/{{title}}/update" method="post">
+  <img src="{{coverPic}}" width="150px" alt="">
+  <label for="title">Book Title</label>
+  <input type="text" name="title" value="{{title}}">
+  <label for="genre">Genre</label>
+  <input type="text" name="genre" value="{{genre}}">
+  <label for="">Cover Photo URL</label>
+  <input type="text" name="coverPic" value="{{coverPic}}">
+  <label for="">Description</label>
+  <input type="text" name="description" value="{{description}}">
+  <div class="authorBox"></div>
+  <div class="authorSelect">
+    {{#each authorss}}
+          <h3>{{fName}}</h3>
+    {{/each}}
+  </div>
+
+
+  <button type="submit" name="button">Update Book</button>
+</form>
