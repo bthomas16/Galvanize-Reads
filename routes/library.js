@@ -50,7 +50,11 @@ router.get('/books/new', (req,res) => {
   })
 
 router.get('/authors/new', (req,res) => {
-  res.render('addAuthor')
+  knex('books')
+    .select()
+    .then((bookss) => {
+  res.render('addBook')
+  })
 })
 
 router.post('/books', (req, res) => {
@@ -91,24 +95,64 @@ router.post('/books/:book_id/:title/update', (req,res) => {
     res.redirect('/galvanize_reads/library/books')
   })
 })
-  // var id = req.params.id
-  // var title = req.params.title
-  // linkQuery.updateBook(req.body, id)
-  // .then(data=>{
-  //   console.log(data);
-  //   res.redirect('/galvanize_reads/library/books' + `/${id}/${title}`)
 
-// router.put('/:id', (req, res) => {
-//   validateTodoInsertUpdateRedirect(req, res, (todo) => {
-//     todo.date = new Date()
-//     knex('todo')
-//     .where('id', req.params.id)
-//     .update(todo, 'id')
-//     .then(() => {
-//         res.redirect(`/todo/${req.params.id}`)
-//         })
-//       })
-// })
+
+// BREAK
+
+router.post('/authors', (req, res) => {
+  linkQuery.newBook(req.body)
+  // console.log(req.body)
+    .then(()=>{
+      res.redirect("/galvanize_reads/library/authors")
+    })
+  })
+
+  router.get('/authors/:author_id/:fName/:lName/edit_author', (req, res) => {
+    const author_id = req.params.author_id;
+    linkQuery.authorInfo(author_id)
+      .then((data) => {
+        console.log(data);
+        res.render('editAuthor', data[0])
+    })
+})
+
+router.post('/authors/:author_id/:fName/:lName/update', (req, res) => {
+  console.log('edit me all night long');
+  const authors = {
+    fName: req.body.fName,
+    lName: req.body.lName,
+    biography: req.body.biography,
+    portrait: req.body.portrait
+  }
+    knex('authors')
+    .where('author_id', req.params.author_id)
+    .update(authors, 'author_id')
+    .then(() => {
+        res.redirect(`/galvanize_reads/library/authors`)
+        })
+      })
+
+      // router.post('/books/:book_id/:title/update', (req,res) => {
+      //   console.log('edit me all night long');
+      //   const books = {
+      //     title: req.body.title,
+      //     description: req.body.description,
+      //     genre: req.body.genre,
+      //     coverPic: req.body.coverPic
+      //   }
+      //     knex('books')
+      //     .where('book_id', req.params.book_id)
+      //     .update(books, 'book_id')
+      //     .then(() => {
+      //         res.redirect(`/galvanize_reads/library/books`)
+      //         })
+      //       })
+
+  router.get('/authors/:id/:fName/:lName/delete', (req, res) => {
+    linkQuery.deleteAuthor(req.params.id).then(() => {
+    res.redirect('/galvanize_reads/library/authors')
+  })
+})
 
 
 
