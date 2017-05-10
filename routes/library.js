@@ -10,22 +10,23 @@ router.get('/authors', function(req, res, next) {
     .select()
     .then((authorss) => {
       // console.log(authorss);
-      res.render('library', { authorss });
+      res.render('authors_library', { authorss });
     })
   })
 
 router.get('/books', function(req, res, next) {
-  knex('books')
-    .select()
-    .then((bookss) => {
-      // console.log(bookss);
-      res.render('library', { bookss });
+  // knex('books').select()
+  linkQuery.allBooks()
+    .then(data => {
+      console.log('HEY');
+      console.log(data);
+      res.render('library', {data})
     })
 })
 
 router.get('/books/:book_id/:title', (req, res) => {
   const book_id = req.params.book_id;
-  linkQuery.bookInfo(book_id)
+  linkQuery.bookInfo(book_id).where('books.book_id', book_id)
     .then((data) => {
       console.log(data);
       res.render('singleBook', data[0])
@@ -58,10 +59,16 @@ router.get('/authors/new', (req,res) => {
 })
 
 router.post('/books', (req, res) => {
+  author_id = req.body.authorSelect
   linkQuery.newBook(req.body)
   // console.log(req.body)
     .then(()=>{
-      res.redirect("/galvanize_reads/library/books")
+      linkQuery.booksPop().then(books => {
+        var lastObject = books.pop()
+          linkQuery.addJoinTable(lastObject, author_id).then(() => {
+              res.redirect("/galvanize_reads/library/books")
+          })
+      })
     })
   })
 
