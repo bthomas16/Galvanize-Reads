@@ -23,18 +23,18 @@ router.get('/books', function(req, res, next) {
     })
 });
 
-router.get('/books/:id/:title', (req, res) => {
-  const id = req.params.id;
-  linkQuery.ideaInfo(id)
-    .then(data1 => {
-      console.log(data1);
-      res.render('singleBook', data1[0])
+router.get('/books/:book_id/:title', (req, res) => {
+  const book_id = req.params.book_id;
+  linkQuery.bookInfo(book_id)
+    .then(data => {
+      console.log(data);
+      res.render('singleBook', data[0])
     })
 })
 
-router.get('/authors/:id/:fName/:lName', (req, res) => {
-  const id = req.params.id;
-  linkQuery.ideaInfo(id)
+router.get('/authors/:author_id/:fName/:lName', (req, res) => {
+  const author_id = req.params.author_id;
+  linkQuery.authorInfo(author_id)
     .then(data => {
       console.log(data);
       res.render('singleAuthor', data[0])

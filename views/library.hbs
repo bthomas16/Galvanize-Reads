@@ -4,16 +4,16 @@
 {{/if}}
 
 {{#each authorss}}
-        <a href="/galvanize_reads/library/authors/{{id}}/{{fName}}/{{lName}}">
-        <h2><span>Author:</span> {{fName}} {{lName}}</h2>
-        <h4><span>Biography: </span>{{biography}}</h4>
-        <h5><img src="{{portrait}}" width="150px;"></h5>
-        </a>
-        <h5><span>Books:</span>
-          {{#each books}}
-            <a href="/galvanize_reads/library/{{id}}/{{title}}">{{title}}</a>
-          {{/each}}
-        </h5>
+  <a href="/galvanize_reads/library/authors/{{author_id}}/{{fName}}/{{lName}}">
+    <h2><span>Author:</span> {{fName}} {{lName}}</h2>
+    <h4><span>Biography: </span>{{biography}}</h4>
+    <h5><img src="{{portrait}}" width="150px;"></h5>
+  </a>
+  <h5><span>Books:</span>
+    {{#each books}}
+      <a href="/galvanize_reads/library/{{id}}/{{title}}">{{title}}</a>
+    {{/each}}
+  </h5>
 {{/each}}
 
 
@@ -23,8 +23,7 @@
 {{/if}}
 
 {{#each bookss}}
-
-  <a href="/galvanize_reads/library/books/{{id}}/{{title}}">
+  <a href="/galvanize_reads/library/books/{{book_id}}/{{title}}">
     <h2><span>Title:</span> {{title}}</h2>
     <h4><span>Genre:</span> {{genre}}</h4>
     <h5><span>Author:</span>  </h5>

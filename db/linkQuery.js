@@ -1,10 +1,16 @@
 const knex = require('./knex')
 
-function ideaInfo(id) {
+function bookInfo(book_id) {
   return knex('books')
-    .where('id', id)
+    .where('book_id', book_id)
+}
+
+function authorInfo(author_id) {
+  return knex('authors')
+    .where('author_id', author_id)
 }
 
 module.exports = {
-  ideaInfo
+  bookInfo,
+  authorInfo
 }
