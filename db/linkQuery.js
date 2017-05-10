@@ -2,8 +2,13 @@ const knex = require('./knex')
 
 function bookInfo(book_id) {
   return knex('books')
-    .where('book_id', book_id)
+    .fullOuterJoin('authors_books', 'books.book_id', 'authors_books.books_id')
+    .fullOuterJoin('authors', 'authors.author_id', 'authors_books.authors_id')
+    .select('title','genre','description','coverPic', 'fName', 'lName')
+    .where('books.book_id', book_id)
 }
+
+// access database name. Do ajoin statement to join table('jointablename', 'primary nkey', 'foreign key to join table').outterjoin('othertable', 'primary key' , 'join table foreing key').select(names of data you want to have access to).where(id is equal to id)
 
 function authorInfo(author_id) {
   return knex('authors')
