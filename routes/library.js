@@ -53,7 +53,7 @@ router.get('/authors/new', (req,res) => {
   knex('books')
     .select()
     .then((bookss) => {
-  res.render('addBook')
+  res.render('addAuthor', { bookss })
   })
 })
 
@@ -100,7 +100,7 @@ router.post('/books/:book_id/:title/update', (req,res) => {
 // BREAK
 
 router.post('/authors', (req, res) => {
-  linkQuery.newBook(req.body)
+  linkQuery.newAuthor(req.body)
   // console.log(req.body)
     .then(()=>{
       res.redirect("/galvanize_reads/library/authors")

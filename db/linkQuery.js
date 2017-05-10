@@ -21,7 +21,7 @@ function newBook(body){
   })
 }
 
-function newBook(body){
+function newAuthor(body){
   console.log(body);
   console.log('bitches');
   return knex('authors').insert({
@@ -64,9 +64,11 @@ module.exports = {
   bookInfo,
   authorInfo,
   newBook,
+  newAuthor,
   updateBook,
   deleteBook,
-  deleteAuthor
+  deleteAuthor,
+
 }
 
 

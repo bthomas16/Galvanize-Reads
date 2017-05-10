@@ -2,10 +2,10 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('books', (table) => {
     table.increments('book_id').primary();
-    table.string('title');
-    table.string('genre');
-    table.text('description');
-    table.string('coverPic');
+    table.string('title').notNullable();
+    table.string('genre')
+    table.text('description')
+    table.string('coverPic')
   });
 };
 
