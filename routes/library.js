@@ -61,6 +61,50 @@ router.post('/books', (req, res) => {
     })
   })
 
+  router.get('/books/:book_id/:title/edit', (req, res) => {
+    const book_id = req.params.book_id;
+    linkQuery.bookInfo(book_id)
+      .then((data) => {
+        console.log(data);
+        res.render('edit', data[0])
+    })
+})
+
+router.post('/books/:book_id/:title/update', (req,res) => {
+  console.log('edit me all night long');
+  const books = {
+    title: req.body.title,
+    description: req.body.description,
+    genre: req.body.genre,
+    coverPic: req.body.coverPic
+  }
+    knex('books')
+    .where('book_id', req.params.book_id)
+    .update(books, 'book_id')
+    .then(() => {
+        res.redirect(`/galvanize_reads/library/books`)
+        })
+      })
+  // var id = req.params.id
+  // var title = req.params.title
+  // linkQuery.updateBook(req.body, id)
+  // .then(data=>{
+  //   console.log(data);
+  //   res.redirect('/galvanize_reads/library/books' + `/${id}/${title}`)
+
+// router.put('/:id', (req, res) => {
+//   validateTodoInsertUpdateRedirect(req, res, (todo) => {
+//     todo.date = new Date()
+//     knex('todo')
+//     .where('id', req.params.id)
+//     .update(todo, 'id')
+//     .then(() => {
+//         res.redirect(`/todo/${req.params.id}`)
+//         })
+//       })
+// })
+
+
 
 
 module.exports = router
