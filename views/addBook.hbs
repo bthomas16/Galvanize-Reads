@@ -7,11 +7,13 @@
   <input type="text" name="coverPic" value="">
   <label for="">Description</label>
   <input type="text" name="description" value="">
-  <div class="authorBox"></div>
+  <div class="authorBox">{{fName}} {{lName}}</div>
   <div class="authorSelect">
-    {{#each authorss}}
-          <h3>{{fName}}</h3>
-    {{/each}}
+    <select class="" name="authorSelect">
+      {{#each authorss}}
+            <option value="{{author_id}}">{{fName}} {{lName}}</option>
+      {{/each}}
+    </select>
   </div>
 
 

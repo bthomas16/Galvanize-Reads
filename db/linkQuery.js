@@ -2,17 +2,30 @@ const knex = require('./knex')
 
 function bookInfo(book_id) {
   return knex('books')
-    .fullOuterJoin('authors_books', 'books.book_id', 'authors_books.books_id')
-    .fullOuterJoin('authors', 'authors.author_id', 'authors_books.authors_id')
-    .select('title','genre','description','coverPic', 'fName', 'lName')
-    .where('books.book_id', book_id)
+    .join('authors_books', 'books.book_id', 'authors_books.books_id')
+    .join('authors', 'authors.author_id', 'authors_books.authors_id')
+    .select('title','genre','description','coverPic', 'fName', 'lName', 'book_id', 'author_id')
+}
+
+function allBooks() {
+  return knex('books')
+    .join('authors_books', 'books.book_id', 'authors_books.books_id')
+    .join('authors', 'authors.author_id', 'authors_books.authors_id')
+    .select('title','genre','description','coverPic', 'fName', 'lName', 'book_id', 'author_id')
 }
 
 // access database name. Do ajoin statement to join table('jointablename', 'primary nkey', 'foreign key to join table').outterjoin('othertable', 'primary key' , 'join table foreing key').select(names of data you want to have access to).where(id is equal to id)
 
+// function authorInfo(author_id) {
+//   return knex('authors')
+//     .where('author_id', author_id)
+// }
+
 function authorInfo(author_id) {
   return knex('authors')
-    .where('author_id', author_id)
+    .fullOuterJoin('authors_books', 'authors.author_id', 'authors_books.authors_id')
+    .fullOuterJoin('books', 'books.book_id', 'authors_books.books_id')
+    .select('title','genre','description','coverPic', 'fName', 'lName', 'book_id', 'author_id')
 }
 
 function newBook(body){
@@ -65,6 +78,17 @@ function deleteAuthor(author_id) {
   'author_id', author_id).del()
 }
 
+function booksPop() {
+  return knex('books')
+}
+
+function addJoinTable(lastObject, author_id) {
+  return knex('authors_books').insert({
+    'books_id': lastObject.book_id,
+    'authors_id': author_id
+  })
+}
+
 module.exports = {
   bookInfo,
   authorInfo,
@@ -73,7 +97,9 @@ module.exports = {
   updateBook,
   deleteBook,
   deleteAuthor,
-
+  allBooks,
+  booksPop,
+  addJoinTable
 }
 
 
